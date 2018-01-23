@@ -3,15 +3,13 @@
 one:
   name: MyString
   email: MyString
-  email: MyString
   password: MyString
   gender: MyString
-  dob: 
+  dob: 2018-01-23 08:28:30
 
 two:
   name: MyString
   email: MyString
-  email: MyString
   password: MyString
   gender: MyString
-  dob: 
+  dob: 2018-01-23 08:28:30
