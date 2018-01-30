@@ -1,0 +1,15 @@
+%h1 User Address
+%ul
+  %li
+    %strong Name:
+    #{@user.name}
+  %li
+    %strong City:
+    #{@address.city}
+  %li
+    %strong Pincode:
+    #{@address.pincode}
+  %li
+    %strong Country:
+    #{@address.country}
+=link_to('Back', user_path(@user))

@@ -1,0 +1,14 @@
+%h1 User's Posts
+%p
+  -@posts.each do |post|
+    %br/
+    %div
+      %strong Name:
+      #{@user.name}
+    %div
+      %strong Title:
+      #{post.title}
+    %div
+      %strong Content:
+      #{post.content}
+=link_to('Back', user_path)

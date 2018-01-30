@@ -1,0 +1,20 @@
+%h1 User Profile
+%ul
+  %li
+    %strong Name:
+    #{@user.name}
+  %li
+    %strong Email:
+    #{@user.email}
+  %li
+    %strong Gender:
+    #{@user.gender}
+  %li
+    %strong Birth Date:
+    #{@user.dob}
+=link_to('Address', user_address_path(@address))
+=link_to('Create Post', new_user_post_path(@user))
+-if @post != nil
+  =link_to('Show Posts', user_post_path(@post))
+  =link_to('Newsfeed', user_posts_path(@post))
+=link_to('Back', users_path)

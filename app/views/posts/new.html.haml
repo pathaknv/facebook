@@ -1,0 +1,17 @@
+%h1 Post
+
+= form_tag user_posts_path, :method => :post do
+
+  %p
+    = label :post, :title, 'Title'
+    %br/
+    = text_field :user, :title
+
+  %p
+    = label :post, :content, 'Type Content'
+    %br/
+    = text_area :user, :content
+
+  %p
+    =link_to('Cancel', users_path)
+    = submit_tag 'Submit'

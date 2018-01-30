@@ -1,0 +1,38 @@
+%h1 Register Here
+
+= form_tag users_path, :method => :post do
+  - if @user.errors.any?
+    %h2
+      = pluralize(@user.errors.count, "error")
+      prohibited
+      this article from being saved:
+    %ul
+      - @user.errors.full_messages.each do |msg|
+        %li= msg
+
+  %p
+    = label :user, :name, 'Name'
+    %br/
+    = text_field :user, :name
+  %p
+    = label :user, :email, 'Email'
+    %br/
+    = text_field :user, :email
+  %p
+    = label :user, :password, 'Password'
+    %br/
+    = text_field :user, :password
+  %p
+    = label :user, :confirm_password, 'Confirm Password'
+    %br/
+    = text_field :user, :password
+  %p
+    = label :user, :gender, 'Gender'
+    %br/
+    = text_field :user, :gender
+  %p
+    = label :user, :dob, 'Birth Date'
+    %br/
+    = text_field :user, :dob
+  %p
+    = submit_tag 'Submit'

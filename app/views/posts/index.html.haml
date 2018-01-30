@@ -1,0 +1,11 @@
+%h1 Newsfeed
+%div
+  - @posts.each do |post|
+    %span
+      %strong Title: #{post.title}
+    %span #{post.created_at}
+    %br/
+    %span Content: #{post.content}
+    %br/
+    %br/
+=link_to('Back', users_path)
