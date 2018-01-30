@@ -12,7 +12,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @address = Address.find_by(user_id: params[:id])
     @post = Post.find_by(user_id: params[:id])
-    #@date = UsersController.readable_date(Date.today)
     respond_to do |format|
       format.html
       format.json { render json: @user }
@@ -23,7 +22,7 @@ class UsersController < ApplicationController
     @user = User.new
     @parameters = ['name', 'email', 'password', 'gender', 'dob']
     respond_to do |format|
-      #format.html
+      format.html
       format.json { render json: @parameters }
     end
   end
@@ -31,7 +30,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to @user
+      #render json: @user, status: :created
+      redirect_to  users_path, status: :created
     else
       render 'new'
     end

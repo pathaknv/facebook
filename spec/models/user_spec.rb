@@ -13,42 +13,74 @@
 #
 
 require 'rails_helper.rb'
-RSpec.describe do
-  context 'User Validation' do
-    it "Valid User Details" do
-      user = User.new
-      user.name = 'Nikhil Pathak'
-      user.email = 'nikhilpathak926@gmail.com'
-      user.password = 'hahahaha'
-      user.gender = 'Male'
-      user.dob = '1/1/1996'
-      result = user.save
-      expect(user.valid?).to eq(true)
+RSpec.describe User do
+  context 'VALID USER INFORMATION-> ' do
+    it "User succesfully created" do
+      user = create(:user)
+      expect(user.errors.any?).to eq(false)
     end
 
-    context 'Email Validations' do
-      it 'Correct Email' do
-        user = User.create(name: 'Nikhil', email: 'nikhil@g.co', password: 'qwertyuiop', gender: 'Male')
-        expect(user.valid?).to eq(true)
+    context 'EMAIL VALIDATIONS-> ' do
+      it 'should be correct email' do
+        user = User.new
+        user.email = 'nikhil@g.com'
+        user.save
+        expect(user.errors[:email]).to eq([])
       end
 
-      it 'Incorrect Email' do
-        user = User.create(name: 'Nikhil', email: 'nikhilg.co', password: 'qwertyuiop', gender: 'Male')
-        expect(user.valid?).to eq(false)
+      it 'should be correct email format' do
+        user = User.new
+        user.email = 'nikhilgmail.com'
+        user.save
+        expect(user.errors[:email]).to eq(['is invalid'])
+      end
+
+      it 'should not voilate email validations' do
+        user = User.new
+        user.email = ''
+        user.save
+        expect(user.errors[:email]).to eq(['Field Cannot Be Empty', 'is invalid'])
+      end
+
+      it 'should be unique' do
+        user = User.create(name: 'Nikhil', email: 'nvp@gmail.com', password: 'qwertyuiop', gender: 'Male')
+        user = User.new
+        user.email = 'nvp@gmail.com'
+        user.save
+        expect(user.errors[:email]).to eq(['has already been taken'])
       end
     end
 
-    context 'Password Validation' do
-      it 'Correct Password Validation' do
-        user = User.create(name: 'Nikhil', email: 'nikhil@g.co', password: 'qwertyuiop', gender: 'Male')
-        expect(user.valid?).to eq(false)
+    context 'PASSWORD VALDIATIONS-> ' do
+      it 'should be correct password' do
+        user = User.new
+        user.password = 'qwertyuiop'
+        user.save
+        expect(user.errors[:password]).to eq([])
       end
 
-      it 'Incorrect Password Validation' do
-        user = User.create(name: 'Nikhil', email: 'nikhil@g.co', password: 'qwe', gender: 'Male')
-        expect(user.valid?).to eq(false)
+      it 'should have password length in [6..32]' do
+        user = User.new
+        user.password = 'qwert'
+        user.save
+        expect(user.errors[:password]).to eq(['is too short'])
       end
     end
 
+    context 'GENDER VALIDATIONS-> ' do
+      it 'should have some value' do
+        user = User.new
+        user.gender = ''
+        user.save
+        expect(user.errors[:gender]).to eq(['Field Cannot Be Empty'])
+      end
+
+      it 'should have correct gender validation' do
+        user = User.new
+        user.gender = 'Male'
+        user.save
+        expect(user.errors[:gender]).to eq([])
+      end
+    end
   end
 end

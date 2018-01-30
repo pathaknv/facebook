@@ -16,9 +16,10 @@ class User < ApplicationRecord
   validates :name, :email, :password, :gender, presence: { message: 'Field Cannot Be Empty' }
   validates :email, uniqueness: true, format: { with: /[\w.]*\@[\w]*\.[\w]*/ }
   #validates :gender, inclusion: { in: %w('Male', 'Female'), message: 'Valid Gender' }
-  validates :password, length: { in: 6..32 }
+  validates :password, length: { in: 6..32, message: 'is too short' }
 
   has_one :address
+  has_many :posts
 
   before_create do
     puts 'Creating the Object....'

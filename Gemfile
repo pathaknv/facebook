@@ -57,3 +57,7 @@ gem 'annotate'
 gem "haml-rails", "~> 1.0"
 gem 'react-rails'
 gem 'rspec-rails'
+gem 'rails-controller-testing'
+gem 'pry-rails'
+gem 'factory_bot_rails'
+gem 'faker'
